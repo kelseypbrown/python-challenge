@@ -10,7 +10,7 @@ with open(csvpath) as csvfile:
     
     csv_header = next (csvreader)
     
-    #Set Variables
+    #Set Variables:
     total_profit_losses = 0
 
     total_months = 0
@@ -23,7 +23,7 @@ with open(csvpath) as csvfile:
     greatest_decrease = 999999999
     greatest_decrease_month= ""
 
-    #Create Loop through rows
+    #Create Loop through rows:
     for row in csvreader:
        
        profit_losses = row[1]
@@ -31,29 +31,29 @@ with open(csvpath) as csvfile:
         #Calculate total profit losses:
        total_profit_losses = total_profit_losses + int(profit_losses)
         
-        #Calculate total months:
+        #Calculate total months (the number of rows):
        total_months = total_months + 1
        
-       #Calculate change for average change
+       #Calculate sum profit losses for average change:
        if total_months > 1:
            change = int(profit_losses) - int(last_profit_losses)
 
            sum_profit_losses = sum_profit_losses + change
 
-           #Calculate greatest increase
+           #Calculate greatest increase:
            if change > greatest_increase:
                greatest_increase = change
                greatest_increase_month = row[0]
 
-            #Calculate greatest decrease
+            #Calculate greatest decrease:
            if change < greatest_decrease:
                greatest_decrease = change
                greatest_decrease_month = row[0]
 
-        
+        #Reset last profit loss each loop for accurate calculation of change
        last_profit_losses = row[1]
 
-    #Summary Analysis
+    #Print Summary Analysis:
     print("Financial Analysis")
     print("-------------------------------")
     print(f'Total Months: {total_months}')
@@ -63,7 +63,7 @@ with open(csvpath) as csvfile:
     print(f'Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})')
     print(f'Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease})')
 
-    #Output to text file
+    #Output to text file:
     output_path = os.path.join("Analysis", "results.txt")
 
     lines = [f'Total Months: {total_months}', 
