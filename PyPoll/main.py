@@ -4,7 +4,7 @@ import csv
 
 csvpath = os.path.join("Resources", "election_data.csv")
 
-#Create dictionary to hold candidate names and their counts
+#Create dictionary for candidates:
 candidates = {}
 
 with open(csvpath) as csvfile:
@@ -13,28 +13,29 @@ with open(csvpath) as csvfile:
     
     csv_header = next (csvreader)
 
-#Set variables
+#Set variables:
     total_votes=0
 
-#Create loop through rows
+#Create loop through rows:
     for row in csvreader:
 
-        #Calculate Total Votes
+        #Calculate Total Votes (the number of rows):
         total_votes = total_votes + 1
 
-        #Use dictionary to find winner and votes per candidate
+        #Use dictionary to find/store candidates:
         if row[2] in candidates:
             candidates[row[2]] += 1
         else:
             candidates[row[2]] = 1
     
 
-#Summary Analysis
+#Print Summary Analysis:
 print('Election Results')
 print('--------------------------')
 print(f'Total Votes: {total_votes}')
 print('--------------------------')
 
+#Use dictionary to loop through and find vote counts and winner:
 winner = 0
 winner_candidate = ''
 for key, value in candidates.items():
@@ -47,7 +48,7 @@ for key, value in candidates.items():
 print(f'Winner: {winner_candidate}')
 print('--------------------------')
 
-#Output to text file
+#Output to text file:
 output_path = os.path.join("Analysis", "results.txt")
 
 with open(output_path, 'w') as f:
